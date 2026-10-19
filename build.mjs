@@ -4,10 +4,14 @@
 // e li salva in public/fonts/ con nomi basati sul contenuto. Così i font sono serviti dal
 // nostro dominio e il browser dei visitatori non contatta Google. Poi sostituisce il segnaposto
 // <!--FONTS--> nelle pagine HTML con i link ai font.
+//
+// Inserisce anche nella pagina l'elenco delle racchette (senza range e schede) e i conteggi del
+// catalogo, presi dal motore in lib/motore.js: il motore resta sul server.
 // Se qualcosa va storto la build si ferma e resta online la versione precedente del sito.
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
+import motore from './lib/motore.js';
 
 const PUBLIC = 'public';
 const FONT_DIR = path.join(PUBLIC, 'fonts');
@@ -40,6 +44,22 @@ async function download(url, asText) {
   throw new Error(`Download non riuscito: ${url} (${lastError && lastError.message})`);
 }
 
+/* ---------- Dati per la pagina ---------- */
+{
+  const file = path.join(PUBLIC, 'index.html');
+  let html = await readFile(file, 'utf8');
+  const inserisci = (nome, valore) => {
+    const re = new RegExp(`/\\*${nome}\\*/[\\s\\S]*?/\\*FINE\\*/`);
+    if (!re.test(html)) throw new Error(`index.html: manca il segnaposto ${nome}`);
+    html = html.replace(re, () => JSON.stringify(valore));
+  };
+  inserisci('RACCHETTE', motore.RACCHETTE_PUBBLICHE);
+  inserisci('CONTEGGI', motore.CONTEGGI);
+  await writeFile(file, html);
+  console.log(`Pagina: ${motore.RACCHETTE_PUBBLICHE.length} racchette, ${motore.CONTEGGI.corde} corde di ${motore.CONTEGGI.marche} marche`);
+}
+
+/* ---------- Font ---------- */
 const css = await download(CSS_URL, true);
 const urls = [...new Set([...css.matchAll(FONT_URL)].map(m => m[1]))];
 if (!urls.length) throw new Error('Il CSS di Google Fonts non contiene file di font');
