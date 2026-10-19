@@ -1,6 +1,6 @@
 # Teoria delle Corde
 
-Sito: https://teoriadellecorde.com
+Sito: https://www.teoriadellecorde.com (anche teoriadellecorde.com, che rimanda qui)
 
 Questionario per tennisti: in base al gioco e alla racchetta suggerisce tipo di corda, calibro,
 tensione in kg e modelli in commercio. Consigli basati sulla teoria, non ricette.
