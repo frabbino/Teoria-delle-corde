@@ -1,0 +1,4 @@
+node_modules/
+.vercel/
+public/fonts/
+.DS_Store

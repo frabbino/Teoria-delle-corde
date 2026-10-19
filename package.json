@@ -1,0 +1,9 @@
+{
+  "name": "teoria-delle-corde",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Teoria delle Corde: corda, calibro e tensione per il tuo tennis. Sito statico.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

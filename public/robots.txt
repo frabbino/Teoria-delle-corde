@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teoriadellecorde.com/sitemap.xml
