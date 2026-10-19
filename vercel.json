@@ -5,19 +5,6 @@
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.teoriadellecorde.com"
-        }
-      ],
-      "destination": "https://teoriadellecorde.com/:path*",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/fonts/(.*)",

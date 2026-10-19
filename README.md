@@ -14,8 +14,8 @@ tensione in kg e modelli in commercio. Consigli basati sulla teoria, non ricette
 - `build.mjs` gira su Vercel a ogni pubblicazione. Scarica i font da Google Fonts e li mette in
   `public/fonts/`, così il sito non fa contattare Google ai visitatori. Alla fine scrive
   `/build.txt`, un breve resoconto (commit, font, pagine) per controllare la pubblicazione.
-- `vercel.json` contiene le impostazioni di pubblicazione: indirizzi senza `.html`, passaggio da
-  www.teoriadellecorde.com a teoriadellecorde.com, cache dei font e intestazioni di sicurezza.
+- `vercel.json` contiene le impostazioni di pubblicazione: indirizzi senza `.html`, cache dei font
+  e intestazioni di sicurezza.
 
 ## Pubblicare una modifica
 
