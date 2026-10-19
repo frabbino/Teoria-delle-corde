@@ -91,5 +91,17 @@ for (const page of pages) {
   await writeFile(file, html.replace(PLACEHOLDER, tags));
 }
 
+// Piccolo resoconto della build, leggibile su /build.txt per controllare che i font siano a posto.
+const report = [
+  'Teoria delle Corde: resoconto della build',
+  `data: ${new Date().toISOString()}`,
+  `commit: ${(process.env.VERCEL_GIT_COMMIT_SHA || 'locale').slice(0, 7)}`,
+  `font: ${local.size} file, ${Math.round(bytes / 1024)} KB`,
+  `foglio: /fonts/${cssName}`,
+  `precaricati: ${preload.join(', ') || 'nessuno'}`,
+  `pagine: ${pages.join(', ')}`,
+].join('\n') + '\n';
+await writeFile(path.join(PUBLIC, 'build.txt'), report);
+
 console.log(`Font locali: ${local.size} file (${Math.round(bytes / 1024)} KB), ${preload.length} precaricati, foglio /fonts/${cssName}`);
 console.log(`Pagine aggiornate: ${pages.join(', ')}`);
